@@ -9,34 +9,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @PostMapping
+    @PostMapping("/user")
     public ResponseEntity<?> createUser(@RequestBody User user){
         userService.createUser(user);
         return ResponseEntity.accepted().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping
+    @PutMapping("/updateUser/")
     public ResponseEntity<?> update(@RequestBody User user) {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/user")
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Integer id) {
         return ResponseEntity.ok(User.builder().id(id).build());
     }
